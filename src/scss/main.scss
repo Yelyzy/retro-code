@@ -2,10 +2,12 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-synthesis: none;
 }
 
 a {
   color: inherit;
+  text-decoration: none;
 }
 
 img,
@@ -15,4 +17,101 @@ video {
 
 html {
   background-color: #030B0E;
+  font-family: "EASVHS";
+}
+
+body {
+  margin: 40px;
+}
+
+@font-face {
+  font-family: "EASVHS";
+  src: url(../assets/font/EASVHS.ttf) format(".ttf");
+  font-weight: 400;
+}
+
+.subtitle {
+  font-family: "EASVHS";
+  font-size: 20px;
+  letter-spacing: 2.56px;
+  text-transform: uppercase;
+  color: rgba(67, 236, 142);
+}
+
+main {
+  display: grid;
+  grid-template-columns: auto 4fr 1fr;
+  width: 100%;
+}
+
+.tv-conteiner {
+  border: 3px solid #43EC8E;
+  border-radius: 8px;
+  width: max-content;
+  padding: 26px;
+}
+
+
+.tv-content {
+  width: min-content;
+  position: relative;
+}
+
+.tv-info {
+  flex-direction: column;
+    justify-self: center;
+    display: flex;
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.tv-info>img {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  justify-self: center;
+  flex-direction: column;
+  padding: 24px;
+  opacity: 0.22;
+ 
+}
+
+.tv-info > div {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+h1 {
+  color: #43EC8E;
+  text-transform: uppercase;
+  font-size: 128px;
+  text-shadow: 0 0 28px rgba(67, 236, 142, 0.55);
+  letter-spacing: 2.56px;
+}
+
+button {
+  display: flex;
+  padding: 14px 40px;
+  border-radius: 4px;
+  background: var(--accent-yellow, #F8FC81);
+  box-shadow: 0 0 0 3px #3B3C1A;
+
+  & a {
+        text-transform: uppercase;
+        font-family: "EASVHS";
+        font-size: 24px;
+        letter-spacing: 0.48px;
+      }
+}
+
+.deg {
+  transform: rotate(-90deg);
 }
