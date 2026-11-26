@@ -3,11 +3,84 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Spirographe numérique</title>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
     <link rel="stylesheet" href="../scss/spirographic.scss" />
   </head>
   <body>
+    <div id="app">
+      <!-- слева: холст (p5 кладёт canvas сюда) -->
+      <main id="stage"></main>
+
+      <!-- справа: панель MECHANISM / STROKE -->
+      <aside id="side">
+        <section class="panel">
+          <h2>MECHANISM</h2>
+          <div class="panel-body">
+            <div class="control">
+              <label for="circles">Number of circles</label>
+              <div class="control-row">
+                <button type="button" class="arrow-left" aria-label="Number of circles: decrease"></button>
+                <input type="text" id="circles" readonly />
+                <button type="button" class="arrow-right" aria-label="Number of circles: increase"></button>
+              </div>
+            </div>
+            <div class="control">
+              <label for="ratio">Scale down</label>
+              <div class="control-row">
+                <button type="button" class="arrow-left" aria-label="Scale down: decrease"></button>
+                <input type="text" id="ratio" readonly />
+                <button type="button" class="arrow-right" aria-label="Scale down: increase"></button>
+              </div>
+            </div>
+            <div class="control">
+              <label for="speed-k">Relative speed (k)</label>
+              <div class="control-row">
+                <button type="button" class="arrow-left" aria-label="Relative speed (k): decrease"></button>
+                <input type="text" id="speed-k" readonly />
+                <button type="button" class="arrow-right" aria-label="Relative speed (k): increase"></button>
+              </div>
+            </div>
+            <div class="control">
+              <label for="pen">Pen position</label>
+              <div class="control-row">
+                <button type="button" class="arrow-left" aria-label="Pen position: decrease"></button>
+                <input type="text" id="pen" readonly />
+                <button type="button" class="arrow-right" aria-label="Pen position: increase"></button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>STROKE</h2>
+          <div class="panel-body panel-stroke">
+            <div class="control" role="group" aria-labelledby="colour-label">
+              <p class="control-label" id="colour-label">Colour</p>
+              <div class="swatches">
+                <input type="radio" class="swatch swatch-red" name="colour" value="red" aria-label="Red" />
+                <input type="radio" class="swatch swatch-blue" name="colour" value="blue" aria-label="Blue" />
+                <input type="radio" class="swatch swatch-green" name="colour" value="green" aria-label="Green" checked />
+                <input type="radio" class="swatch swatch-yellow" name="colour" value="yellow" aria-label="Yellow" />
+                <input type="radio" class="swatch swatch-wine" name="colour" value="wine" aria-label="Wine" />
+                <input type="radio" class="swatch swatch-navy" name="colour" value="navy" aria-label="Navy" />
+                <input type="radio" class="swatch swatch-sage" name="colour" value="sage" aria-label="Sage" />
+                <input type="radio" class="swatch swatch-rainbow" name="colour" value="rainbow" aria-label="Rainbow" />
+              </div>
+            </div>
+            <div class="control">
+              <label for="thickness">Thickness</label>
+              <div class="control-row">
+                <button type="button" class="arrow-left" aria-label="Thickness: decrease"></button>
+                <input type="text" id="thickness" readonly />
+                <button type="button" class="arrow-right" aria-label="Thickness: increase"></button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </div>
+
     <script src="../js/spirographic.js" type="module"></script>
   </body>
 </html>

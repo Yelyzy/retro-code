@@ -1,8 +1,42 @@
+// стили панели (стрелки, поля, цветные квадраты) — те же, что на главной
+@import "./input-button.scss";
+
+@font-face {
+  font-family: "EASVHS";
+  src: url(../assets/font/EASVHS.ttf) format("truetype");
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   overflow: hidden;
   background: #03100d;
+  color: #43ec8e;
+  font-family: "EASVHS", monospace;
 }
+
+/* ===== ДВЕ КОЛОНКИ: холст | панель ===== */
+#app {
+  display: flex;
+  height: 100vh;
+}
+
+#stage {
+  flex: 1; /* холст занимает всё, что осталось от панели */
+  min-width: 0;
+}
+
+#side {
+  width: 400px;
+  flex: none;
+  border-left: 2px solid #14513a;
+  padding: 36px 20px 24px;
+}
+
 canvas {
   display: block;
 }

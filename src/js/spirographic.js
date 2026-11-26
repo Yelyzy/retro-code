@@ -25,7 +25,9 @@ let dt; // маленький шаг времени
 let lastPen = null; // предыдущая точка пера
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  const stage = select("#stage"); // левая колонка из HTML
+  createCanvas(stage.width, stage.height).parent("stage"); // холст внутри #stage
+  setupPanel(); // подключаем кнопки панели
   restart();
 }
 
@@ -181,10 +183,67 @@ function restart() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  const stage = select("#stage");
+  resizeCanvas(stage.width, stage.height);
   restart();
+}
+
+// =====================================================
+//  ПАНЕЛЬ: стрелки ◀ ▶ и цветные квадраты
+// =====================================================
+
+// id = id поля в HTML, key = имя в params
+// min / max = пределы, step = шаг одного клика, text = как показать значение
+const CONTROLS = [
+  { id: "circles", key: "circles", min: 2, max: 5, step: 1, text: (v) => v },
+  { id: "ratio", key: "scale", min: 2, max: 6, step: 1, text: (v) => "x " + v },
+  { id: "speed-k", key: "k", min: 2, max: 6, step: 1, text: (v) => v },
+  { id: "pen", key: "pen", min: 0, max: 150, step: 10, text: (v) => v + "%" },
+  { id: "thickness", key: "thickness", min: 1, max: 8, step: 1, text: (v) => "x " + v },
+];
+
+// цвета квадратов (те же, что в input-button.scss)
+const COLOURS = {
+  red: "#d4260e",
+  blue: "#02d8fc",
+  green: "#43ec8e",
+  yellow: "#f8fc81",
+  wine: "#722f37",
+  navy: "#2e5090",
+  sage: "#85b09a",
+  rainbow: "rainbow",
+};
+
+function setupPanel() {
+  // стрелки
+  for (const c of CONTROLS) {
+    const input = document.getElementById(c.id);
+    const row = input.parentElement;
+
+    // direction: -1 = левая стрелка, +1 = правая
+    const change = (direction) => {
+      const next = constrain(params[c.key] + direction * c.step, c.min, c.max);
+      if (next === params[c.key]) return; // уже на краю
+      params[c.key] = next;
+      input.value = c.text(next);
+      restart(); // рисуем заново с новыми значениями
+    };
+
+    input.value = c.text(params[c.key]); // начальное значение
+    row.querySelector(".arrow-left").addEventListener("click", () => change(-1));
+    row.querySelector(".arrow-right").addEventListener("click", () => change(1));
+  }
+
+  // цвет: меняет только новую линию, рисунок не стираем
+  for (const radio of document.querySelectorAll('input[name="colour"]')) {
+    if (radio.checked) params.colour = COLOURS[radio.value];
+    radio.addEventListener("change", () => {
+      params.colour = COLOURS[radio.value];
+    });
+  }
 }
 
 // type="module" прячет функции внутри файла — отдаём их p5 через window
 window.setup = setup;
 window.draw = draw;
+window.windowResized = windowResized;
