@@ -234,5 +234,49 @@ function drawGrid() {
   for (let y = 0; y < height; y += 50) line(0, y, width, y); // horizontales
 }
 
+// =====================================================
+// 5. PANNEAU : les boutons ◀ ▶ changent les valeurs
+// =====================================================
+
+// id = id de l'input, key = nom dans P
+// min / max = limites, step = pas d'un clic
+// scale = P.pen vaut 0…1 mais on affiche 0…100 %
+const CONTROLS = [
+  { id: "circles", key: "circles", min: 2, max: 6, step: 1, text: (v) => v },
+  { id: "ratio", key: "ratio", min: 2, max: 10, step: 1, text: (v) => `x ${v}` },
+  { id: "speed-k", key: "k", min: 1, max: 10, step: 1, text: (v) => v },
+  { id: "pen", key: "pen", min: 0, max: 100, step: 10, scale: 100, text: (v) => `${v}%` },
+];
+
+// Efface la ligne et recommence le dessin avec les nouvelles valeurs
+function restart() {
+  t = 0;
+  turn = 0;
+  prev = null;
+  playing = true;
+  trail.clear();
+  updateRadius();
+}
+
+for (const c of CONTROLS) {
+  const input = document.getElementById(c.id);
+  const row = input.parentElement;
+  const scale = c.scale || 1;
+
+  // direction : -1 = bouton gauche, +1 = bouton droit
+  const change = (direction) => {
+    const current = Math.round(P[c.key] * scale);
+    const next = Math.min(c.max, Math.max(c.min, current + direction * c.step));
+    if (next === current) return; // déjà à la limite
+    P[c.key] = next / scale;
+    input.value = c.text(next);
+    restart();
+  };
+
+  input.value = c.text(Math.round(P[c.key] * scale)); // valeur de départ
+  row.querySelector(".arrow-left").addEventListener("click", () => change(-1));
+  row.querySelector(".arrow-right").addEventListener("click", () => change(1));
+}
+
 window.setup = setup;
 window.draw = draw;

@@ -15,5 +15,80 @@
   </section>
 
   <!-- droite : panneau MECHANISM / STROKE (créé par sketch.js) -->
-  <aside id="side"></aside>
+  <aside id="side">
+    <section class="panel">
+      <h2>MECHANISM</h2>
+      <div class="panel-body">
+        <div class="control">
+          <label for="circles">Number of circles</label>
+          <div class="control-row">
+            <button type="button" class="arrow-left" aria-label="Number of circles: decrease"></button>
+            <input type="text" id="circles" value="4" />
+            <button type="button" class="arrow-right" aria-label="Number of circles: increase"></button>
+          </div>
+        </div>
+        <div class="control">
+          <label for="ratio">Scale down</label>
+          <div class="control-row">
+            <button type="button" class="arrow-left" aria-label="Scale down: decrease"></button>
+            <input type="text" id="ratio" value="x 3" />
+            <button type="button" class="arrow-right" aria-label="Scale down: increase"></button>
+          </div>
+        </div>
+        <div class="control">
+          <label for="speed-k">Relative speed (k)</label>
+          <div class="control-row">
+            <button type="button" class="arrow-left" aria-label="Relative speed (k): decrease"></button>
+            <input type="text" id="speed-k" value="4" />
+            <button type="button" class="arrow-right" aria-label="Relative speed (k): increase"></button>
+          </div>
+        </div>
+        <div class="control">
+          <label for="pen">Pen position</label>
+          <div class="control-row">
+            <button type="button" class="arrow-left" aria-label="Pen position: decrease"></button>
+            <input type="text" id="pen" value="100%" />
+            <button type="button" class="arrow-right" aria-label="Pen position: increase"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>STROKE</h2>
+      <div class="panel-body panel-stroke">
+        <div class="control" role="group" aria-labelledby="colour-label">
+          <p class="control-label" id="colour-label">Colour</p>
+          <div class="swatches">
+            <input type="radio" class="swatch swatch-red" name="colour" value="red" aria-label="Red" />
+            <input type="radio" class="swatch swatch-blue" name="colour" value="blue" aria-label="Blue" />
+            <input type="radio" class="swatch swatch-green" name="colour" value="green" aria-label="Green" />
+            <input type="radio" class="swatch swatch-yellow" name="colour" value="yellow" aria-label="Yellow" />
+            <input type="radio" class="swatch swatch-wine" name="colour" value="wine" aria-label="Wine" />
+            <input type="radio" class="swatch swatch-navy" name="colour" value="navy" aria-label="Navy" />
+            <input type="radio" class="swatch swatch-sage" name="colour" value="sage" aria-label="Sage" />
+            <input type="radio" class="swatch swatch-rainbow" name="colour" value="rainbow" aria-label="Rainbow" />
+          </div>
+          <div class="swatches">
+            <input type="radio" class="swatch swatch-red" name="colour-2" value="red" aria-label="Red (second row)" />
+            <input type="radio" class="swatch swatch-blue" name="colour-2" value="blue" aria-label="Blue (second row)" />
+            <input type="radio" class="swatch swatch-green" name="colour-2" value="green" aria-label="Green (second row)" />
+            <input type="radio" class="swatch swatch-yellow" name="colour-2" value="yellow" aria-label="Yellow (second row)" />
+            <input type="radio" class="swatch swatch-wine" name="colour-2" value="wine" aria-label="Wine (second row)" />
+            <input type="radio" class="swatch swatch-navy" name="colour-2" value="navy" aria-label="Navy (second row)" />
+            <input type="radio" class="swatch swatch-sage" name="colour-2" value="sage" aria-label="Sage (second row)" />
+            <input type="radio" class="swatch swatch-rainbow" name="colour-2" value="rainbow" aria-label="Rainbow (second row)" />
+          </div>
+        </div>
+        <div class="control">
+          <label for="thickness">Thickness</label>
+          <div class="control-row">
+            <button type="button" class="arrow-left" aria-label="Thickness: decrease"></button>
+            <input type="text" id="thickness" value="x 3" />
+            <button type="button" class="arrow-right" aria-label="Thickness: increase"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </aside>
 </div>

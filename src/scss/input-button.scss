@@ -1,0 +1,156 @@
+/* ===== ПРАВАЯ ПАНЕЛЬ: MECHANISM + STROKE ===== */
+$swatches: (
+  "red": #d4260e,
+  "blue": #02d8fc,
+  "green": #43ec8e,
+  "yellow": #f8fc81,
+  "wine": #722f37,
+  "navy": #2e5090,
+  "sage": #85b09a,
+  "rainbow":
+    linear-gradient(
+      180deg,
+      #d4260e 0%,
+      #f8fc81 32.212%,
+      #43ec8e 65.865%,
+      #02d8fc 96.635%
+    ),
+);
+
+#side {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  /* две секции выше экрана: панель прокручивается сама */
+  overflow-y: auto;
+
+  h2 {
+    font-family: "EASVHS";
+    font-size: 24px;
+    text-align: center;
+    padding: 10px 10px;
+    background: linear-gradient(180deg, hsl(60deg 0% 0%) 87.5%, hsl(0deg 0% 4.0077%) 100%);
+    /* плашка на всю ширину панели */
+    margin: 0 -20px;
+    border-radius: 4px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.48px;
+    text-shadow: none;
+  }
+}
+
+.panel {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  max-width: 352px;
+  margin: 0 auto;
+}
+
+.panel-stroke {
+  gap: 40px;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+
+  &:first-of-type {
+    gap: 16px;
+  }
+
+  label,
+  .control-label {
+    font-family: "EASVHS";
+    font-size: 20px;
+    line-height: normal;
+    text-transform: uppercase;
+    color: #43ec8e;
+  }
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  input {
+    flex: 1;
+    min-width: 0;
+    height: 34px;
+    padding: 0 9px;
+    border: 1px solid #43ec8e;
+    border-radius: 0;
+    background: #5f554e;
+    font-family: "EASVHS";
+    font-size: 16px;
+    text-transform: uppercase;
+    font-feature-settings: "zero" 1;
+    color: #030b0e;
+  }
+
+  /* перебиваем общие стили button из main.scss */
+  button {
+    position: relative;
+    flex: none;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 0;
+    background: none;
+    box-shadow: none;
+    cursor: pointer;
+
+    /* картинка 40x40: 34px кнопка + 3px обводка с каждой стороны */
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      background: url("../assets/img/arrow.svg") center / 40px 40px no-repeat;
+    }
+  }
+
+  /* в svg стрелка смотрит вправо, левую отражаем */
+  .arrow-left::before {
+    transform: scaleX(-1);
+  }
+}
+
+/* ===== цветные квадраты (radio) ===== */
+.swatches {
+  display: flex;
+  gap: 8px;
+
+  .swatch {
+    appearance: none;
+    flex: none;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    cursor: pointer;
+
+    /* выбранный цвет (в макете этого состояния нет) */
+    &:checked,
+    &:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+  }
+
+  @each $name, $colour in $swatches {
+    .swatch-#{$name} {
+      background: $colour;
+    }
+  }
+}
