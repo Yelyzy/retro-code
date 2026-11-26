@@ -31,7 +31,24 @@ let trail; // calque invisible pour la ligne
 let t = 0; // angle actuel
 let turn = 0; // tours terminés
 let prev = null; // point précédent du stylo
-let playing = false; // dessin en cours ?
+let playing = true; // dessin en cours ?
+
+// Combien de tours pour que le dessin se referme ?
+// Chaque tour tourne de "shift" degrés. Le dessin est fermé quand on a fait 360°.
+// Exemple : shift = 9° → 360 / 9 = 40 tours.
+// gcd (plus grand diviseur commun) sert quand 360 ne se divise pas juste (ex. shift = 7°).
+function gcd(a, b) {
+  return b === 0 ? a : gcd(b, a % b);
+}
+function totalTurns() {
+  if (P.shift === 0) return 1; // pas de décalage → 1 seul tour suffit
+  return 360 / gcd(P.shift, 360);
+}
+
+// Écrit un texte dans la zone d'état (READY_, RUNNING_, CLOSED_…)
+function setStatus(s) {
+  document.getElementById("status").textContent = s;
+}
 
 // =====================================================
 // 2. TAILLE ET MATHÉMATIQUES
@@ -119,19 +136,44 @@ function segment(a, b) {
   );
 }
 
-// Avance l'angle t d'un petit pas (dt) et trace la ligne du stylo
+// advance(dt) : un petit pas du dessin
+//
+//   tourner un tout petit peu (t += dt)
+//           ↓
+//   un tour complet ?  ── oui ──→  tour suivant (turn + 1)
+//           ↓                        ↓
+//           ↓                 tous les tours faits ?  ── oui ──→  fin
+//           ↓                        ↓ non
+//   où est le stylo maintenant ?  ←──┘
+//   (tourné de shift × turn degrés)
+//           ↓
+//   tracer une ligne de « avant » à « maintenant »
+//           ↓
+//   retenir « maintenant »
+//
 function advance(dt) {
   t += dt; // le mécanisme tourne un peu
   if (t >= TWO_PI) {
     // un tour complet est fini ?
-    t = 0;
-    prev = null;
-    playing = false; // → on s'arrête (on changera ça à l'étape 4)
-    return;
+    t -= TWO_PI; // on recommence l'angle
+    turn++; // un tour de plus
+    prev = null; // on ne relie pas la fin d'un tour au début du suivant
+    if (turn >= totalTurns()) {
+      // tous les tours sont faits ?
+      t = 0;
+      finish(); // → fin du dessin
+      return;
+    }
   }
-  const pt = mechanism(t).penPt; // Sinon : on demande où est le stylo maintenant (pt)?
-  if (prev) segment(prev, pt); // on trace une ligne depuis sa position d'avant (prev) jusqu'à maintenant (pt),
-  prev = pt; // on garde cette position pour la prochaine fois
+  const pt = rotPt(mechanism(t).penPt, radians(P.shift) * turn); // stylo, tourné de shift × turn
+  if (prev) segment(prev, pt); // ligne : avant → maintenant
+  prev = pt; // maintenant devient "avant"
+}
+
+// Fin du dessin : on s'arrête et on l'écrit à l'écran
+function finish() {
+  playing = false;
+  setStatus("CLOSED_");
 }
 
 // =====================================================
@@ -154,7 +196,8 @@ function draw() {
   drawGrid(); // grille
 
   // --- on fait avancer le dessin ---
-  if (playing) {
+  if (playing && turn < totalTurns()) {
+    // on dessine ET il reste des tours à faire
     // si on est en train de dessiner
     for (let s = 0; s < P.speed * 5; s++) {
       // 20 petits pas par image (speed 4 × 5) - s = 0   →  0 < 20?  OUI  →  advance(0.004)  →  s = 1
@@ -167,6 +210,7 @@ function draw() {
   // --- les roues ---
   push(); // on garde les réglages de dessin
   translate(width / 2, height / 2); // (0, 0) = centre de l'écran
+  rotate(radians(P.shift) * turn); // les roues tournent avec le dessin
   const m = mechanism(t); // on demande où sont les cercles et le stylo
 
   noFill(); // cercles vides
