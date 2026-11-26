@@ -24,7 +24,9 @@ body {
 /* ===== DEUX COLONNES : gauche (écran) + droite (panneau) ===== */
 #app {
   display: flex;
-  min-height: 100vh;
+  /* оставляем место под футер (110px + отступы 60px сверху и снизу), чтобы страница не скроллилась */
+  height: calc(100vh - 230px);
+  min-height: 480px;
 }
 
 #left {
