@@ -10,7 +10,17 @@
   <body>
     <div id="app">
       <!-- слева: холст (p5 кладёт canvas сюда) -->
-      <main id="stage"></main>
+      <main id="stage">
+        <div id="status" aria-live="polite">READY_</div>
+        <div id="controls">
+          <div id="checks"></div>
+          <div id="acts">
+            <button type="button" id="play">PLAY</button>
+            <button type="button" id="restart">RESTART</button>
+            <button type="button" id="export">EXPORT</button>
+          </div>
+        </div>
+      </main>
 
       <!-- справа: панель MECHANISM / STROKE -->
       <aside id="side">
@@ -47,6 +57,22 @@
                 <button type="button" class="arrow-left" aria-label="Pen position: decrease"></button>
                 <input type="text" id="pen" readonly />
                 <button type="button" class="arrow-right" aria-label="Pen position: increase"></button>
+              </div>
+            </div>
+            <div class="control">
+              <label for="turns">Turns</label>
+              <div class="control-row">
+                <button type="button" class="arrow-left" aria-label="Turns: decrease"></button>
+                <input type="text" id="turns" readonly />
+                <button type="button" class="arrow-right" aria-label="Turns: increase"></button>
+              </div>
+            </div>
+            <div class="control">
+              <label for="speed">Speed</label>
+              <div class="control-row">
+                <button type="button" class="arrow-left" aria-label="Speed: decrease"></button>
+                <input type="text" id="speed" readonly />
+                <button type="button" class="arrow-right" aria-label="Speed: increase"></button>
               </div>
             </div>
           </div>

@@ -26,8 +26,10 @@ body {
 }
 
 #stage {
+  position: relative;
   flex: 1; /* холст занимает всё, что осталось от панели */
   min-width: 0;
+  overflow: hidden;
 }
 
 #side {
@@ -39,4 +41,107 @@ body {
 
 canvas {
   display: block;
+}
+
+#stage canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#status,
+#controls {
+  position: absolute;
+  z-index: 1;
+}
+
+#status {
+  top: 16px;
+  left: 18px;
+  font-size: 18px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+#controls {
+  right: 16px;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  pointer-events: none;
+
+  #checks,
+  #acts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    pointer-events: auto;
+  }
+
+  button {
+    min-height: 34px;
+    padding: 6px 10px;
+    border: 1px solid #43ec8e;
+    border-radius: 2px;
+    background: rgba(3, 16, 13, 0.9);
+    box-shadow: none;
+    color: #43ec8e;
+    font: 12px "EASVHS", monospace;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible,
+    &.on {
+      background: #43ec8e;
+      color: #03100d;
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+  }
+
+  .check {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    .box {
+      display: inline-grid;
+      width: 16px;
+      height: 16px;
+      place-items: center;
+      border: 1px solid currentColor;
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  body {
+    overflow: auto;
+  }
+
+  #app {
+    min-height: 100vh;
+    height: auto;
+    flex-direction: column;
+  }
+
+  #stage {
+    flex: none;
+    height: 60vh;
+    min-height: 320px;
+  }
+
+  #side {
+    width: 100%;
+    max-height: none;
+    border-top: 2px solid #14513a;
+    border-left: 0;
+  }
 }

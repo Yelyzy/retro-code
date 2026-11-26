@@ -1,10 +1,10 @@
 // ----- 1. ПАРАМЕТРЫ (потом их будут менять кнопки) -----
 let params = {
-  circles: 3, // NUMBER OF CIRCLES — сколько всего кругов (2–5)
+  circles: 4, // NUMBER OF CIRCLES — сколько всего кругов (2–5)
   scale: 3, // SCALE DOWN — каждый круг в N раз меньше предыдущего (2–6)
-  k: 5, // RELATIVE SPEED — каждый круг крутится в k раз быстрее (2–6)
+  k: 4, // RELATIVE SPEED — каждый круг крутится в k раз быстрее (2–6)
   pen: 100, // PEN POSITION — 0% = центр круга, 100% = край (0–150)
-  turns: 10, // TURNS — через сколько оборотов рисунок замкнётся (1–20)
+  turns: 6, // TURNS — через сколько оборотов рисунок замкнётся (1–20)
   speed: 5, // SPEED — скорость анимации (1–10)
   thickness: 1, // THICKNESS — толщина линии в px (1–8)
   colour: "#3ddc84", // COLOUR — цвет линии или 'rainbow'
@@ -19,16 +19,19 @@ const WHEEL = "#f8f47a";
 
 // ----- 2. СОСТОЯНИЕ -----
 let trail; // отдельный слой для рисунка (его не стираем)
-let playing = true; // идёт ли анимация
+let exportLayer;
+let playing = false; // идёт ли анимация
 let t = 0; // "время": один оборот = TWO_PI, весь рисунок = TWO_PI * turns
 let dt; // маленький шаг времени
 let lastPen = null; // предыдущая точка пера
+let scrollMode = false;
 
 function setup() {
-  const stage = select("#stage"); // левая колонка из HTML
-  createCanvas(stage.width, stage.height).parent("stage"); // холст внутри #stage
+  const stage = document.getElementById("stage");
+  const canvas = createCanvas(max(stage.clientWidth, 1), max(stage.clientHeight, 1));
+  canvas.parent(stage);
   setupPanel(); // подключаем кнопки панели
-  restart();
+  restart(false);
 }
 
 function draw() {
@@ -84,7 +87,7 @@ function mechanism(time) {
     y: y + penDist * sin(penAngle),
   };
 
-  //Шаг 8: ПОВОРОТ "БУМАГИ": за весь рисунок — ровно один полный круг
+  // ПОВОРОТ "БУМАГИ": за весь рисунок — ровно один полный круг
   let rot = time / params.turns;
   for (let c of list) rotateAround(c, rot);
   rotateAround(pen, rot);
@@ -133,12 +136,7 @@ function drawWheels(m) {
 // =====================================================
 function advance(steps) {
   for (let i = 0; i < steps; i++) {
-    if (t >= TWO_PI * params.turns) {
-      // все обороты сделаны — рисунок замкнулся
-      playing = false;
-      return;
-    }
-    t += dt;
+    t = min(t + dt, TWO_PI * params.turns);
     let pen = mechanism(t).pen;
 
     if (lastPen) {
@@ -147,13 +145,17 @@ function advance(steps) {
       trail.line(lastPen.x, lastPen.y, pen.x, pen.y);
     }
     lastPen = pen;
+    if (t >= TWO_PI * params.turns) {
+      setPlaying(false, "CLOSED_");
+      return;
+    }
   }
 }
 
 function currentColour() {
   if (params.colour === "rainbow") {
     let hue = floor((t / (TWO_PI * params.turns)) * 360);
-    return color("hsb(" + hue + ", 100%, 100%)");
+    return color("hsl(" + hue + ", 100%, 50%)");
   }
   return params.colour;
 }
@@ -172,34 +174,38 @@ function stepsPerFrame() {
 }
 
 // =====================================================
-//  УПРАВЛЕНИЕ (сюда потом подключим кнопки)
+//  УПРАВЛЕНИЕ
 // =====================================================
-function restart() {
+function restart(shouldPlay = false) {
+  if (trail) trail.remove();
+  if (exportLayer) exportLayer.remove();
   trail = createGraphics(width, height);
+  exportLayer = createGraphics(width, height);
   t = 0;
   lastPen = null;
   computeStep();
-  playing = true;
+  setPlaying(shouldPlay);
 }
 
 function windowResized() {
-  const stage = select("#stage");
-  resizeCanvas(stage.width, stage.height);
-  restart();
+  const stage = document.getElementById("stage");
+  if (!stage || stage.clientWidth === 0 || stage.clientHeight === 0) return;
+  resizeCanvas(stage.clientWidth, stage.clientHeight);
+  restart(false);
 }
 
 // =====================================================
-//  ПАНЕЛЬ: стрелки ◀ ▶ и цветные квадраты
+//  ПАНЕЛЬ И КНОПКИ
 // =====================================================
 
-// id = id поля в HTML, key = имя в params
-// min / max = пределы, step = шаг одного клика, text = как показать значение
 const CONTROLS = [
-  { id: "circles", key: "circles", min: 2, max: 5, step: 1, text: (v) => v },
-  { id: "ratio", key: "scale", min: 2, max: 6, step: 1, text: (v) => "x " + v },
-  { id: "speed-k", key: "k", min: 2, max: 6, step: 1, text: (v) => v },
-  { id: "pen", key: "pen", min: 0, max: 150, step: 10, text: (v) => v + "%" },
-  { id: "thickness", key: "thickness", min: 1, max: 8, step: 1, text: (v) => "x " + v },
+  { id: "circles", key: "circles", min: 2, max: 5, step: 1, text: (v) => v, redraw: true },
+  { id: "ratio", key: "scale", min: 2, max: 6, step: 0.5, text: (v) => "x " + v, redraw: true },
+  { id: "speed-k", key: "k", min: 2, max: 6, step: 1, text: (v) => v, redraw: true },
+  { id: "pen", key: "pen", min: 0, max: 150, step: 10, text: (v) => v + "%", redraw: true },
+  { id: "turns", key: "turns", min: 1, max: 20, step: 1, text: (v) => v, redraw: true },
+  { id: "speed", key: "speed", min: 1, max: 10, step: 1, text: (v) => v, redraw: false },
+  { id: "thickness", key: "thickness", min: 1, max: 8, step: 1, text: (v) => v + " px", redraw: false },
 ];
 
 // цвета квадратов (те же, что в input-button.scss)
@@ -215,35 +221,114 @@ const COLOURS = {
 };
 
 function setupPanel() {
-  // стрелки
   for (const c of CONTROLS) {
     const input = document.getElementById(c.id);
     const row = input.parentElement;
 
-    // direction: -1 = левая стрелка, +1 = правая
     const change = (direction) => {
       const next = constrain(params[c.key] + direction * c.step, c.min, c.max);
       if (next === params[c.key]) return; // уже на краю
       params[c.key] = next;
       input.value = c.text(next);
-      restart(); // рисуем заново с новыми значениями
+      if (c.redraw) restart(false);
     };
 
-    input.value = c.text(params[c.key]); // начальное значение
+    input.value = c.text(params[c.key]);
     row.querySelector(".arrow-left").addEventListener("click", () => change(-1));
     row.querySelector(".arrow-right").addEventListener("click", () => change(1));
   }
 
-  // цвет: меняет только новую линию, рисунок не стираем
   for (const radio of document.querySelectorAll('input[name="colour"]')) {
     if (radio.checked) params.colour = COLOURS[radio.value];
     radio.addEventListener("change", () => {
       params.colour = COLOURS[radio.value];
     });
   }
+
+  createCheckbox("SHOW THE WHEELS", params.showWheels, (value) => {
+    params.showWheels = value;
+  });
+  createCheckbox("ROLL ON THE OUTSIDE", params.outside, (value) => {
+    params.outside = value;
+    restart(false);
+  });
+  createCheckbox("TURN WITH THE SCROLL WHEEL", scrollMode, (value) => {
+    scrollMode = value;
+    setPlaying(false);
+    document.getElementById("play").disabled = value;
+    setStatus(value ? "SCROLL_" : "READY_");
+  });
+
+  document.getElementById("play").addEventListener("click", togglePlay);
+  document.getElementById("restart").addEventListener("click", () => restart(false));
+  document.getElementById("export").addEventListener("click", exportImage);
+}
+
+function createCheckbox(label, initialValue, onChange) {
+  const item = document.createElement("button");
+  item.type = "button";
+  item.className = "check";
+  item.setAttribute("aria-pressed", String(initialValue));
+
+  const box = document.createElement("span");
+  box.className = "box";
+  box.textContent = initialValue ? "✓" : "";
+  const text = document.createElement("span");
+  text.textContent = label;
+  item.append(box, text);
+  document.getElementById("checks").append(item);
+
+  let value = initialValue;
+  item.addEventListener("click", () => {
+    value = !value;
+    box.textContent = value ? "✓" : "";
+    item.classList.toggle("on", value);
+    item.setAttribute("aria-pressed", String(value));
+    onChange(value);
+  });
+  item.classList.toggle("on", value);
+}
+
+function setPlaying(value, status) {
+  playing = value && !scrollMode;
+  document.getElementById("play").textContent = playing ? "PAUSE" : "PLAY";
+  if (status) {
+    setStatus(status);
+  } else if (playing) {
+    setStatus("RUNNING_");
+  } else if (t >= TWO_PI * params.turns) {
+    setStatus("CLOSED_");
+  } else {
+    setStatus(scrollMode ? "SCROLL_" : "READY_");
+  }
+}
+
+function setStatus(value) {
+  document.getElementById("status").textContent = value;
+}
+
+function togglePlay() {
+  if (scrollMode) return;
+  if (t >= TWO_PI * params.turns) restart(false);
+  setPlaying(!playing);
+}
+
+function exportImage() {
+  exportLayer.background(BG);
+  exportLayer.image(trail, 0, 0);
+  saveCanvas(exportLayer, "spirograph", "png");
+}
+
+function mouseWheel(event) {
+  const overCanvas = mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height;
+  if (!scrollMode || !overCanvas) return;
+  if (t >= TWO_PI * params.turns) restart(false);
+  advance(ceil((abs(event.delta) / 30) * stepsPerFrame()));
+  return false;
 }
 
 // type="module" прячет функции внутри файла — отдаём их p5 через window
 window.setup = setup;
 window.draw = draw;
 window.windowResized = windowResized;
+window.mouseWheel = mouseWheel;
