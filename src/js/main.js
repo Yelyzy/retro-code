@@ -107,3 +107,6 @@ function drawGrid() {
   for (let x = 0; x < width; x += 50) line(x, 0, x, height); // verticales
   for (let y = 0; y < height; y += 50) line(0, y, width, y); // horizontales
 }
+
+window.setup = setup;
+window.draw = draw;
