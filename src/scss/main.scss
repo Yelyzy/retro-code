@@ -24,7 +24,7 @@ html {
 
 body {
   margin: 0;
-  padding: 60px;
+  padding: 40px 60px;
 }
 
 .first-screen {
@@ -32,7 +32,7 @@ body {
   align-items: center;
   display: flex;
   justify-content: space-around;
-  height: 100vh;
+  height: 93vh;
   gap: 30px;
 }
 
@@ -70,7 +70,7 @@ main {
   border: 3px solid #43ec8e;
   border-radius: 8px;
   width: 100%;
-  height: 80vh;
+  height: 70vh;
   min-width: 0;
   padding: 26px;
 }
@@ -80,7 +80,6 @@ main {
   height: 100%;
   position: relative;
 }
-
 
 .tv-info {
   flex-direction: column;
@@ -186,7 +185,7 @@ button {
   align-items: center;
 }
 
-.content-live>img {
+.content-live > img {
   min-width: 0;
 }
 
@@ -410,7 +409,7 @@ button {
   z-index: 10;
   top: 0;
   right: 66px;
-  background-color: #08110F;
+  background-color: #08110f;
   padding: 20px 25px;
   box-sizing: border-box;
   box-shadow: inset 0 0 0 1px #43ec8e;
@@ -418,7 +417,7 @@ button {
   max-width: calc(100% - 132px);
   opacity: 0.8;
 }
-.section-text-decor>p{
+.section-text-decor > p {
   font-family: "EASVHS";
   text-transform: lowercase;
   letter-spacing: 2.56px;
