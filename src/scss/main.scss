@@ -1,3 +1,5 @@
+@import "./spirograph.scss";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -16,7 +18,7 @@ video {
 }
 
 html {
-  background-color: #030B0E;
+  background-color: #030b0e;
   font-family: "EASVHS";
 }
 
@@ -45,12 +47,11 @@ main {
 }
 
 .tv-conteiner {
-  border: 3px solid #43EC8E;
+  border: 3px solid #43ec8e;
   border-radius: 8px;
   width: max-content;
   padding: 26px;
 }
-
 
 .tv-content {
   width: min-content;
@@ -59,15 +60,15 @@ main {
 
 .tv-info {
   flex-direction: column;
-    justify-self: center;
-    display: flex;
-    position: absolute;
-    inset: 0;
-    align-items: center;
-    justify-content: center;
+  justify-self: center;
+  display: flex;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
 }
 
-.tv-info>img {
+.tv-info > img {
   position: absolute;
   z-index: 1;
   display: flex;
@@ -75,7 +76,6 @@ main {
   flex-direction: column;
   padding: 24px;
   opacity: 0.22;
- 
 }
 
 .tv-info > div {
@@ -87,10 +87,9 @@ main {
   align-items: center;
 }
 
-
-
-h1, h2 {
-  color: #43EC8E;
+h1,
+h2 {
+  color: #43ec8e;
   text-transform: uppercase;
   font-size: 128px;
   text-shadow: 0 0 28px rgba(67, 236, 142, 0.55);
@@ -106,20 +105,20 @@ button {
   display: flex;
   padding: 14px 40px;
   border-radius: 4px;
-  background: var(--accent-yellow, #F8FC81);
-  box-shadow: 0 0 0 3px #3B3C1A;
+  background: var(--accent-yellow, #f8fc81);
+  box-shadow: 0 0 0 3px #3b3c1a;
 
   & a {
-        text-transform: uppercase;
-        font-family: "EASVHS";
-        font-size: 24px;
-        letter-spacing: 0.48px;
-      }
+    text-transform: uppercase;
+    font-family: "EASVHS";
+    font-size: 24px;
+    letter-spacing: 0.48px;
+  }
 }
 
 .deg {
   writing-mode: vertical-rl;
-  transform: rotate(180deg);  
+  transform: rotate(180deg);
 }
 
 .interface-load {
@@ -129,11 +128,11 @@ button {
 }
 
 .tv-live-card {
-  border: 1px solid #43EC8E;
+  border: 1px solid #43ec8e;
 }
 
 .header-live {
-  border-bottom: 1px solid #43EC8E;
+  border-bottom: 1px solid #43ec8e;
   background: rgba(67, 236, 142, 0.15);
   padding: 8px 12px;
   display: flex;
@@ -144,7 +143,7 @@ button {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #F8FC81;
+  background-color: #f8fc81;
   animation: pulse 1.2s infinite;
 }
 .content-live {
@@ -152,7 +151,7 @@ button {
 }
 
 .description-game {
-  border: 1px solid #43EC8E;
+  border: 1px solid #43ec8e;
   padding: 20px 12px;
 }
 
@@ -160,10 +159,9 @@ button {
   display: flex;
   flex-direction: column;
   gap: 12px;
-
 }
 .loader-card > .subtitle {
-  color: #F8FC81;
+  color: #f8fc81;
   animation: colorTitre 0s 1.8s forwards;
 }
 .loader-bar {
@@ -172,131 +170,180 @@ button {
   gap: 0.8px;
   padding: 1px 1px;
   grid-template-columns: repeat(20, 1fr);
-  border: 1px solid #F8FC81;
+  border: 1px solid #f8fc81;
   animation: solidBlock 0s 1.8s forwards;
 }
 
 .block-meter {
-  background-color: #F8FC81;
+  background-color: #f8fc81;
   border-radius: 25%;
   animation: bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(1) {
   grid-column: 1;
   opacity: 0;
-  animation: blinky1 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(2) {
   grid-column: 2;
   opacity: 0;
-  animation: blinky1 0.4s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 0.4s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(3) {
   grid-column: 3;
   opacity: 0;
-  animation: blinky1 0.6s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 0.6s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(4) {
   grid-column: 4;
   opacity: 0;
-  animation: blinky1 0.8s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 0.8s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(5) {
   grid-column: 5;
   opacity: 0;
-  animation: blinky1 1s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 1s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(6) {
   grid-column: 6;
   opacity: 0;
-  animation: blinky1 1.2s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
-  
+  animation:
+    blinky1 1.2s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(7) {
   grid-column: 7;
   opacity: 0;
-  animation: blinky1 1.4s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 1.4s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(8) {
   grid-column: 8;
   opacity: 0;
-  animation: blinky1 1.6s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 1.6s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(9) {
   grid-column: 9;
   opacity: 0;
-  animation: blinky1 1.6s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 1.6s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(10) {
   grid-column: 10;
   opacity: 0;
-  animation: blinky1 1.6s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 1.6s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(11) {
   grid-column: 11;
   opacity: 0;
-  animation: blinky1 1.6s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 1.6s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(12) {
   grid-column: 12;
   opacity: 0;
-  animation: blinky1 1.6s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 1.6s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(13) {
   grid-column: 13;
   opacity: 0;
-  animation: blinky1 1.6s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 1.6s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(14) {
   grid-column: 14;
   opacity: 0;
-  animation: blinky1 1.6s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 1.6s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(15) {
   grid-column: 15;
   opacity: 0;
-  animation: blinky1 1.6s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 1.6s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(16) {
   grid-column: 16;
   opacity: 0;
-  animation: blinky1 1.6s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 1.6s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(17) {
   grid-column: 17;
   opacity: 0;
-  animation: blinky1 1.6s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 1.6s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(18) {
   grid-column: 18;
   opacity: 0;
-  animation: blinky1 1.6s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 1.6s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(19) {
   grid-column: 19;
   opacity: 0;
-  animation: blinky1 1.6s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 1.6s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 .block-meter:nth-of-type(20) {
   grid-column: 20;
   opacity: 0;
-  animation: blinky1 1.6s 0.2s linear forwards, bgBlock 0s 1.8s forwards;
+  animation:
+    blinky1 1.6s 0.2s linear forwards,
+    bgBlock 0s 1.8s forwards;
 }
 
-
 @keyframes blinky1 {
-  99% {opacity: 0;}
-  100% {opacity: 1;}
+  99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes solidBlock {
-  100% {border: 1px solid #43EC8E; color: #43EC8E;}
+  100% {
+    border: 1px solid #43ec8e;
+    color: #43ec8e;
+  }
 }
 
 @keyframes colorTitre {
-  100% { color: #43EC8E;}
+  100% {
+    color: #43ec8e;
+  }
 }
 
 @keyframes bgBlock {
-  100% { background-color: #43EC8E;}
+  100% {
+    background-color: #43ec8e;
+  }
 }
