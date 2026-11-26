@@ -1,4 +1,6 @@
-// ===== PARAMÈTRES (valeurs par défaut, modifiées ensuite par le panneau) =====
+// =====================================================
+// 1. PARAMÈTRES (valeurs par défaut, modifiées ensuite par le panneau)
+// =====================================================
 const P = {
   circles: 4, // nombre de cercles
   ratio: 3, // chaque cercle est N fois plus petit
@@ -11,7 +13,6 @@ const P = {
   wheels: true, // afficher les roues
   outside: true, // rouler à l'extérieur
   scroll: false, // tourner avec la molette
-  symmetry: false, // symétrie ×3
 };
 
 const PALETTE = [
@@ -31,6 +32,10 @@ let t = 0; // angle actuel
 let turn = 0; // tours terminés
 let prev = null; // point précédent du stylo
 let playing = false; // dessin en cours ?
+
+// =====================================================
+// 2. TAILLE ET MATHÉMATIQUES
+// =====================================================
 
 // calcule R pour que toute la chaîne de cercles tienne dans le canvas
 //i = 1   →  1 меньше 4?  ДА  →  делаю то, что в { }  →  i становится 2
@@ -85,7 +90,55 @@ function mechanism(t) {
   return { centers: centers, penPt: penPt }; // on renvoie les cercles + le stylo
 }
 
-// ===== SETUP : une seule fois au début =====
+// =====================================================
+// 3. DESSIN DE LA LIGNE (sur le calque invisible "trail")
+// =====================================================
+
+// Donne la couleur du trait choisie dans PALETTE
+function strokeColour() {
+  const c = PALETTE[P.colour]; // la couleur choisie
+  if (c === "rainbow")
+    return `hsl(${(turn * 30 + degrees(t) * 0.3) % 360}, 85%, 65%)`; // arc-en-ciel
+  return c;
+}
+
+// Tourne un point autour du centre (0, 0) d'un angle a
+function rotPt(p, a) {
+  return { x: p.x * cos(a) - p.y * sin(a), y: p.x * sin(a) + p.y * cos(a) };
+}
+
+// Trace un petit bout de ligne entre le point a et le point b
+function segment(a, b) {
+  trail.stroke(strokeColour()); // couleur du trait
+  trail.strokeWeight(P.thickness); // épaisseur du trait
+  trail.line(
+    a.x + width / 2,
+    a.y + height / 2, // + width/2, + height/2 = centre de l'écran
+    b.x + width / 2,
+    b.y + height / 2,
+  );
+}
+
+// Avance l'angle t d'un petit pas (dt) et trace la ligne du stylo
+function advance(dt) {
+  t += dt; // le mécanisme tourne un peu
+  if (t >= TWO_PI) {
+    // un tour complet est fini ?
+    t = 0;
+    prev = null;
+    playing = false; // → on s'arrête (on changera ça à l'étape 4)
+    return;
+  }
+  const pt = mechanism(t).penPt; // Sinon : on demande où est le stylo maintenant (pt)?
+  if (prev) segment(prev, pt); // on trace une ligne depuis sa position d'avant (prev) jusqu'à maintenant (pt),
+  prev = pt; // on garde cette position pour la prochaine fois
+}
+
+// =====================================================
+// 4. p5 : SETUP ET DRAW
+// =====================================================
+
+// SETUP : une seule fois au début
 function setup() {
   const stage = document.getElementById("stage"); // on trouve la boîte #stage du HTML
   const w = stage.clientWidth; // sa largeur
@@ -95,9 +148,21 @@ function setup() {
   updateRadius(); // calcule la taille des cercles
 }
 
+// DRAW : en boucle, ~60 fois par seconde
 function draw() {
   background(2, 13, 15); // fond sombre, efface l'image précédente
   drawGrid(); // grille
+
+  // --- on fait avancer le dessin ---
+  if (playing) {
+    // si on est en train de dessiner
+    for (let s = 0; s < P.speed * 5; s++) {
+      // 20 petits pas par image (speed 4 × 5) - s = 0   →  0 < 20?  OUI  →  advance(0.004)  →  s = 1
+      advance(0.004); // un petit pas : t augmente de 0.004
+      if (!playing) break; // si c'est fini, on sort
+    }
+  }
+  image(trail, 0, 0); // on affiche la ligne déjà tracée
 
   // --- les roues ---
   push(); // on garde les réglages de dessin
