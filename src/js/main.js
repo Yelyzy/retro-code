@@ -92,12 +92,29 @@ function setup() {
   const h = Math.round(w * 0.7); // hauteur = 70 % de la largeur
   createCanvas(w, h).parent("stage"); // canvas placé dans #stage
   trail = createGraphics(w, h); // calque pour la ligne
+  updateRadius(); // calcule la taille des cercles
 }
 
-// ===== DRAW : en boucle, ~60 fois par seconde =====
 function draw() {
   background(2, 13, 15); // fond sombre, efface l'image précédente
   drawGrid(); // grille
+
+  // --- les roues ---
+  push(); // on garde les réglages de dessin
+  translate(width / 2, height / 2); // (0, 0) = centre de l'écran
+  const m = mechanism(t); // on demande où sont les cercles et le stylo
+
+  noFill(); // cercles vides
+  stroke(248, 242, 126, 150); // jaune
+  for (const c of m.centers) {
+    // pour chaque cercle de la liste
+    circle(c.x, c.y, c.r * 2); // on le dessine (circle veut un diamètre)
+  }
+
+  noStroke(); // pas de contour
+  fill(217, 38, 28); // rouge
+  circle(m.penPt.x, m.penPt.y, 7); // le stylo
+  pop(); // on revient aux réglages d'avant
 }
 
 // grille : une ligne tous les 50 px
