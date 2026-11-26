@@ -1,0 +1,63 @@
+/* ===== COULEURS DU PROJET (utilisées partout en dessous) ===== */
+:root {
+  --bg: #020b0d; /* fond de la page */
+  --fg: #3df08f; /* vert : texte et bordures */
+  --line: #14513a; /* vert foncé : ligne de séparation */
+}
+
+/* box-sizing : la bordure et le padding sont comptés DANS la taille d'un bloc */
+* {
+  box-sizing: border-box;
+}
+
+/* ===== LA PAGE ===== */
+body {
+  margin: 0; /* pas de marge blanche autour de la page */
+  min-height: 100vh; /* au moins la hauteur de l'écran */
+  background: var(--bg); /* fond sombre */
+  color: var(--fg); /* texte vert */
+  font-family: "VT323", monospace; /* police pixel */
+  font-size: 22px;
+  text-transform: uppercase; /* tout le texte en majuscules */
+}
+
+/* ===== DEUX COLONNES : gauche (écran) + droite (panneau) ===== */
+#app {
+  display: flex; /* les enfants se mettent côte à côte */
+  min-height: 100vh;
+}
+
+#left {
+  flex: 1; /* prend toute la place qui reste */
+  min-width: 0;
+  padding: 36px 24px 24px; /* espace : haut 36, côtés 24, bas 24 */
+}
+
+#side {
+  width: 400px; /* largeur fixe du panneau */
+  flex: none; /* ne rétrécit pas */
+  border-left: 2px solid var(--line); /* ligne verte à gauche du panneau */
+  padding: 36px 20px 24px;
+}
+
+/* ===== L'ÉCRAN (le cadre du canvas) ===== */
+#stage {
+  position: relative; /* pour placer #status à l'intérieur */
+  border: 2px solid var(--fg); /* cadre vert */
+  border-radius: 10px; /* coins arrondis */
+  overflow: hidden; /* rien ne dépasse du cadre */
+  line-height: 0; /* enlève un petit espace sous le canvas */
+}
+
+#stage canvas {
+  display: block;
+}
+
+/* le texte READY_ en bas à gauche de l'écran */
+#status {
+  position: absolute; /* posé PAR-DESSUS le canvas */
+  left: 14px;
+  bottom: 8px;
+  line-height: 1;
+  font-size: 20px;
+}
