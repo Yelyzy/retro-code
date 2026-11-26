@@ -47,7 +47,7 @@ function totalTurns() {
 
 // Écrit un texte dans la zone d'état (READY_, RUNNING_, CLOSED_…)
 function setStatus(s) {
-  document.getElementById("status").textContent = s;
+  select("#status").html(s); // p5 : on écrit le texte dans #status
 }
 
 // =====================================================
@@ -69,9 +69,9 @@ function setStatus(s) {
 function updateRadius() {
   let reach = 1; // jusqu'où va le dessin (en "unités" de R)
   for (let i = 1; i < P.circles; i++) {
-    reach += 2 / Math.pow(P.ratio, i); // chaque petit cercle ajoute 2 × son rayon
+    reach += 2 / pow(P.ratio, i); //p5: pow =puissance; chaque petit cercle ajoute 2 × son rayon
   }
-  R = (Math.min(width, height) * 0.46) / reach; // 46 % du côté le plus court, divisé par reach
+  R = (min(width, height) * 0.46) / reach; // 46 % du côté le plus court, divisé par reach
 }
 
 // Calcule où se trouvent tous les cercles et le stylo pour un angle t.
@@ -182,9 +182,9 @@ function finish() {
 
 // SETUP : une seule fois au début
 function setup() {
-  const stage = document.getElementById("stage"); // on trouve la boîte #stage du HTML
-  const w = stage.clientWidth; // sa largeur
-  const h = Math.round(w * 0.7); // hauteur = 70 % de la largeur
+  const stage = select("#stage"); // on trouve la boîte #stage du HTML
+  const w = stage.width; // sa largeur
+  const h = round(w * 0.7); // hauteur = 70 % de la largeur
   createCanvas(w, h).parent("stage"); // canvas placé dans #stage
   trail = createGraphics(w, h); // calque pour la ligne
   updateRadius(); // calcule la taille des cercles

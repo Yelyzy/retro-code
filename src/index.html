@@ -8,137 +8,398 @@
     <script src="https://cdn.jsdelivr.net/npm/p5@1.11.13/lib/p5.min.js"></script>
   </head>
   <body>
-  <div class="first-screen">
-    <main>
-      <div class="subtitle deg"><p>INSPIRED BY THE CLASSIC SPIROGRAPH</p></div>
-      <div class="tv-conteiner">
-        <div class="tv-content">
-          <div class="tv-info">
-            <img src="assets/img/bg-draw-tv-starter.svg" alt="bg-draw-tv" />
-            <div>
-              <p class="subtitle">
-                <span>></span>
-                MECHANICAL DRAWING MACHINE_
-              </p>
-              <h1>spirograph</h1>
-              <button class="start"><a href="#">start drawing</a></button>
+    <div class="first-screen">
+      <main>
+        <div class="subtitle deg">
+          <p>INSPIRED BY THE CLASSIC SPIROGRAPH</p>
+        </div>
+        <div class="tv-conteiner">
+          <div class="tv-content">
+            <div class="tv-info">
+              <img src="assets/img/bg-draw-tv-starter.svg" alt="bg-draw-tv" />
+              <div>
+                <p class="subtitle">
+                  <span>></span>
+                  MECHANICAL DRAWING MACHINE_
+                </p>
+                <h1>spirograph</h1>
+                <button class="start"><a href="#">start drawing</a></button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="interface-load">
-        <div class="tv-live-card">
-          <div class="header-live">
-            <h2>LIVE PREVIEW</h2>
-            <div class="indicator"></div>
+        <div class="interface-load">
+          <div class="tv-live-card">
+            <div class="header-live">
+              <h2>LIVE PREVIEW</h2>
+              <div class="indicator"></div>
+            </div>
+            <div class="content-live">
+              <img src="assets/img/bg-live-starter.svg" alt="img-live" />
+            </div>
           </div>
-          <div class="content-live">
-            <img src="assets/img/bg-live-starter.svg" alt="img-live" />
+          <div class="description-game">
+            <h2 class="subtitle">
+              Your new favourite way to waste time beautifully
+            </h2>
+          </div>
+          <div class="loader-card">
+            <h2 class="subtitle">Loading</h2>
+            <div class="loader-bar">
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+              <div class="block-meter"></div>
+            </div>
           </div>
         </div>
-        <div class="description-game">
-          <h2 class="subtitle">
-            Your new favourite way to waste time beautifully
-          </h2>
-        </div>
-        <div class="loader-card">
-          <h2 class="subtitle">Loading</h2>
-          <div class="loader-bar">
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
-            <div class="block-meter"></div>
+      </main>
+      <div class="footer-container">
+        <div class="footer">
+          <div class="footer-decor">
+            <svg
+              width="100%"
+              height="100"
+              viewBox="0 0 1313 100"
+              preserveAspectRatio="none"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g opacity="0.3">
+                <line y1="0.5" x2="1312" y2="0.5" stroke="#43EC8E" />
+                <line y1="33.5" x2="1312" y2="33.5" stroke="#43EC8E" />
+                <line y1="66.5" x2="1312" y2="66.5" stroke="#43EC8E" />
+                <line y1="99.5" x2="1312" y2="99.5" stroke="#43EC8E" />
+                <line x1="0.5" y1="1" x2="0.500004" y2="100" stroke="#43EC8E" />
+                <line
+                  x1="31.0117"
+                  y1="1"
+                  x2="31.0117"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="61.5234"
+                  y1="1"
+                  x2="61.5234"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="92.0352"
+                  y1="1"
+                  x2="92.0352"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="122.547"
+                  y1="1"
+                  x2="122.547"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="153.059"
+                  y1="1"
+                  x2="153.059"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="183.57"
+                  y1="1"
+                  x2="183.57"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="214.082"
+                  y1="1"
+                  x2="214.082"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="244.594"
+                  y1="1"
+                  x2="244.594"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="275.105"
+                  y1="1"
+                  x2="275.105"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="305.617"
+                  y1="1"
+                  x2="305.617"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="336.127"
+                  y1="1"
+                  x2="336.127"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="366.639"
+                  y1="1"
+                  x2="366.639"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="397.15"
+                  y1="1"
+                  x2="397.15"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="427.662"
+                  y1="1"
+                  x2="427.662"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="458.174"
+                  y1="1"
+                  x2="458.174"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="488.686"
+                  y1="1"
+                  x2="488.686"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="519.197"
+                  y1="1"
+                  x2="519.197"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="549.709"
+                  y1="1"
+                  x2="549.709"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="580.221"
+                  y1="1"
+                  x2="580.221"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="610.732"
+                  y1="1"
+                  x2="610.732"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="641.244"
+                  y1="1"
+                  x2="641.244"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="671.756"
+                  y1="1"
+                  x2="671.756"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="702.268"
+                  y1="1"
+                  x2="702.268"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="732.779"
+                  y1="1"
+                  x2="732.779"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="763.291"
+                  y1="1"
+                  x2="763.291"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="793.803"
+                  y1="1"
+                  x2="793.803"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="824.314"
+                  y1="1"
+                  x2="824.314"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="854.824"
+                  y1="1"
+                  x2="854.824"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="885.336"
+                  y1="1"
+                  x2="885.336"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="915.848"
+                  y1="1"
+                  x2="915.848"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="946.359"
+                  y1="1"
+                  x2="946.359"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="976.871"
+                  y1="1"
+                  x2="976.871"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="1007.38"
+                  y1="1"
+                  x2="1007.38"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="1037.89"
+                  y1="1"
+                  x2="1037.89"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="1068.41"
+                  y1="1"
+                  x2="1068.41"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="1098.92"
+                  y1="1"
+                  x2="1098.92"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="1129.43"
+                  y1="1"
+                  x2="1129.43"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="1159.94"
+                  y1="1"
+                  x2="1159.94"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="1190.45"
+                  y1="1"
+                  x2="1190.45"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="1220.96"
+                  y1="1"
+                  x2="1220.96"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="1251.48"
+                  y1="1"
+                  x2="1251.48"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="1281.99"
+                  y1="1"
+                  x2="1281.99"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+                <line
+                  x1="1312.5"
+                  y1="1"
+                  x2="1312.5"
+                  y2="100"
+                  stroke="#43EC8E"
+                />
+              </g>
+            </svg>
           </div>
-        </div>
-      </div>
-    </main>
-    <div class="footer-container">
-      <div class="footer">
-      <div class="footer-decor">
-        <svg
-          width="100%"
-          height="100"
-          viewBox="0 0 1313 100"
-          preserveAspectRatio="none"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g opacity="0.3">
-            <line y1="0.5" x2="1312" y2="0.5" stroke="#43EC8E" />
-            <line y1="33.5" x2="1312" y2="33.5" stroke="#43EC8E" />
-            <line y1="66.5" x2="1312" y2="66.5" stroke="#43EC8E" />
-            <line y1="99.5" x2="1312" y2="99.5" stroke="#43EC8E" />
-            <line x1="0.5" y1="1" x2="0.500004" y2="100" stroke="#43EC8E" />
-            <line x1="31.0117" y1="1" x2="31.0117" y2="100" stroke="#43EC8E" />
-            <line x1="61.5234" y1="1" x2="61.5234" y2="100" stroke="#43EC8E" />
-            <line x1="92.0352" y1="1" x2="92.0352" y2="100" stroke="#43EC8E" />
-            <line x1="122.547" y1="1" x2="122.547" y2="100" stroke="#43EC8E" />
-            <line x1="153.059" y1="1" x2="153.059" y2="100" stroke="#43EC8E" />
-            <line x1="183.57" y1="1" x2="183.57" y2="100" stroke="#43EC8E" />
-            <line x1="214.082" y1="1" x2="214.082" y2="100" stroke="#43EC8E" />
-            <line x1="244.594" y1="1" x2="244.594" y2="100" stroke="#43EC8E" />
-            <line x1="275.105" y1="1" x2="275.105" y2="100" stroke="#43EC8E" />
-            <line x1="305.617" y1="1" x2="305.617" y2="100" stroke="#43EC8E" />
-            <line x1="336.127" y1="1" x2="336.127" y2="100" stroke="#43EC8E" />
-            <line x1="366.639" y1="1" x2="366.639" y2="100" stroke="#43EC8E" />
-            <line x1="397.15" y1="1" x2="397.15" y2="100" stroke="#43EC8E" />
-            <line x1="427.662" y1="1" x2="427.662" y2="100" stroke="#43EC8E" />
-            <line x1="458.174" y1="1" x2="458.174" y2="100" stroke="#43EC8E" />
-            <line x1="488.686" y1="1" x2="488.686" y2="100" stroke="#43EC8E" />
-            <line x1="519.197" y1="1" x2="519.197" y2="100" stroke="#43EC8E" />
-            <line x1="549.709" y1="1" x2="549.709" y2="100" stroke="#43EC8E" />
-            <line x1="580.221" y1="1" x2="580.221" y2="100" stroke="#43EC8E" />
-            <line x1="610.732" y1="1" x2="610.732" y2="100" stroke="#43EC8E" />
-            <line x1="641.244" y1="1" x2="641.244" y2="100" stroke="#43EC8E" />
-            <line x1="671.756" y1="1" x2="671.756" y2="100" stroke="#43EC8E" />
-            <line x1="702.268" y1="1" x2="702.268" y2="100" stroke="#43EC8E" />
-            <line x1="732.779" y1="1" x2="732.779" y2="100" stroke="#43EC8E" />
-            <line x1="763.291" y1="1" x2="763.291" y2="100" stroke="#43EC8E" />
-            <line x1="793.803" y1="1" x2="793.803" y2="100" stroke="#43EC8E" />
-            <line x1="824.314" y1="1" x2="824.314" y2="100" stroke="#43EC8E" />
-            <line x1="854.824" y1="1" x2="854.824" y2="100" stroke="#43EC8E" />
-            <line x1="885.336" y1="1" x2="885.336" y2="100" stroke="#43EC8E" />
-            <line x1="915.848" y1="1" x2="915.848" y2="100" stroke="#43EC8E" />
-            <line x1="946.359" y1="1" x2="946.359" y2="100" stroke="#43EC8E" />
-            <line x1="976.871" y1="1" x2="976.871" y2="100" stroke="#43EC8E" />
-            <line x1="1007.38" y1="1" x2="1007.38" y2="100" stroke="#43EC8E" />
-            <line x1="1037.89" y1="1" x2="1037.89" y2="100" stroke="#43EC8E" />
-            <line x1="1068.41" y1="1" x2="1068.41" y2="100" stroke="#43EC8E" />
-            <line x1="1098.92" y1="1" x2="1098.92" y2="100" stroke="#43EC8E" />
-            <line x1="1129.43" y1="1" x2="1129.43" y2="100" stroke="#43EC8E" />
-            <line x1="1159.94" y1="1" x2="1159.94" y2="100" stroke="#43EC8E" />
-            <line x1="1190.45" y1="1" x2="1190.45" y2="100" stroke="#43EC8E" />
-            <line x1="1220.96" y1="1" x2="1220.96" y2="100" stroke="#43EC8E" />
-            <line x1="1251.48" y1="1" x2="1251.48" y2="100" stroke="#43EC8E" />
-            <line x1="1281.99" y1="1" x2="1281.99" y2="100" stroke="#43EC8E" />
-            <line x1="1312.5" y1="1" x2="1312.5" y2="100" stroke="#43EC8E" />
-          </g>
-        </svg>
-        </div>
-        <div class="section-text-decor">
-          <p>x(t) = (R-r) cos t + d cos ( (R-r) t / r)</p>
-          <p>x(t) = (R-r) cos t + d cos ( (R-r) t / r)</p>
+          <div class="section-text-decor">
+            <p>x(t) = (R-r) cos t + d cos ( (R-r) t / r)</p>
+            <p>x(t) = (R-r) cos t + d cos ( (R-r) t / r)</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
     <include src="./html/spirograph.html"></include>
+    <include src="./html/spirographic.html"></include>
     <script src="js/main.js" type="module"></script>
   </body>
 </html>
